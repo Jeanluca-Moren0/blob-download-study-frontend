@@ -11,9 +11,9 @@ function App() {
         responseType: 'arraybuffer',
       });
 
-      console.log(response.data);
-
+      console.log(id)
       setPdfBlob(response.data);
+
     } catch (error) {
       console.log(error);
     }
@@ -40,30 +40,36 @@ function App() {
 
     // Remove link from body
     document.body.removeChild(link);
-    setPdfBlob('');
+
   }
 
   return (
     <div className="App">
-      <p>Id do arquivo: 1</p>
-      <div
-        className="button"
-        onClick={() => {
-          getPdfFile('1');
-          downloadBlob(pdfBlob, 'pdf01.pdf');
-        }}
-      >
-        <p>Baixar PDF 01</p>
+      <div className="wrapper">
+        <p>Id do arquivo: 1</p>
+        <div
+          className="button"
+          onClick={() => {
+            getPdfFile('1');
+            setPdfBlob('');
+            downloadBlob(pdfBlob, 'pdf01.pdf');
+          }}
+        >
+          <p>Baixar PDF 01</p>
+        </div>
       </div>
-      <p>Id do arquivo: 2</p>
-      <div
-        className="button"
-        onClick={() => {
-          getPdfFile('2');
-          downloadBlob(pdfBlob, 'pdf02.pdf');
-        }}
-      >
-        <p>Baixar PDF 02</p>
+      <div className="wrapper">
+        <p>Id do arquivo: 2</p>
+        <div
+          className="button"
+          onClick={() => {
+            getPdfFile('2');
+            setPdfBlob('');
+            downloadBlob(pdfBlob, 'pdf02.pdf');
+          }}
+        >
+          <p>Baixar PDF 02</p>
+        </div>
       </div>
     </div>
   );
