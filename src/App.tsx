@@ -11,7 +11,6 @@ function App() {
         responseType: 'arraybuffer',
       });
 
-      console.log(id)
       setPdfBlob(response.data);
 
     } catch (error) {
@@ -22,6 +21,12 @@ function App() {
   function downloadBlob(blob: string, name: string) {
     const fileBlob = new Blob([blob], { type: 'text/plain' });
     const blobUrl = URL.createObjectURL(fileBlob);
+
+    if (fileBlob.size === 0) {
+      alert('Clique novamente, o primeiro clique criou um blob vazio')
+      return
+    }
+
 
     const link = document.createElement('a');
 
@@ -38,7 +43,6 @@ function App() {
       })
     );
 
-    // Remove link from body
     document.body.removeChild(link);
 
   }
@@ -51,8 +55,7 @@ function App() {
           className="button"
           onClick={() => {
             getPdfFile('1');
-            setPdfBlob('');
-            downloadBlob(pdfBlob, 'pdf01.pdf');
+            downloadBlob(pdfBlob, `pdf-${Date.now()}.pdf`);
           }}
         >
           <p>Baixar PDF 01</p>
@@ -64,8 +67,7 @@ function App() {
           className="button"
           onClick={() => {
             getPdfFile('2');
-            setPdfBlob('');
-            downloadBlob(pdfBlob, 'pdf02.pdf');
+            downloadBlob(pdfBlob, `pdf-${Date.now()}.pdf`);
           }}
         >
           <p>Baixar PDF 02</p>
